@@ -222,7 +222,8 @@ public class BruteApproach {
 			nodosCubiertos = new HashSet<>();
 			
 			// 4 - Generamos una nueva solucion utilizando un entorno de radio 2 [mejor_sol.size()-1, mejor_sol_size()+1]
-			int numeroDeEstacion = new Random().nextInt(2) + mejor_sol.size() -1;
+			//int numeroDeEstacion = new Random().nextInt(2) + mejor_sol.size() -1;
+			int numeroDeEstacion = DistributionGenerator.uniform(mejor_sol.size() -1, mejor_sol.size() +1);
 			
 			// Creamos aleatoriamente una nueva solucion y
 			posible_sol_y = generateSolution(numeroDeEstacion);

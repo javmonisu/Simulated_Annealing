@@ -55,6 +55,20 @@ public final class DistributionGenerator {
     }
     
     /**
+     * Returns a random real number uniformly in [a, b).
+     * 
+     * @param  a the left endpoint
+     * @param  b the right endpoint
+     * @return a random real number uniformly in [a, b)
+     * @throws IllegalArgumentException unless <tt>a < b</tt>
+     */
+    public static int uniform(int a, int b) {
+        if (!(a < b)) throw new IllegalArgumentException("Invalid range");
+        int uniformValue = (int) (a + uniform() * (b-a));
+        return uniformValue;
+    }
+    
+    /**
      * Returns a random integer from a Poisson distribution with mean &lambda;.
      *
      * @param  lambda the mean of the Poisson distribution
