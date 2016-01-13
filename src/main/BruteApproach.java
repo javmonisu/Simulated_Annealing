@@ -118,7 +118,7 @@ public class BruteApproach {
 	 * @return
 	 */
 	public static ArrayList<Integer> generateSolution(int numeroEstaciones){
-		int[] estaciones = new Random().ints(0,15).distinct().limit(numeroEstaciones).toArray();
+		int[] estaciones = new Random().ints(0,15).distinct().limit(numeroEstaciones-1).toArray();
 		ArrayList<Integer> posibleSolucion = new ArrayList<>();
 
 	    for (int index = 0; index < estaciones.length; index++)
@@ -170,9 +170,10 @@ public class BruteApproach {
 		
 		/* CONSTANTES DEL PROGRAMA */
 		final double ALFA = 0.9;
-		final int L = 400, maxItEstables = 500;
-		final double tInicial=9.5, tMin=1;
+		final int L = 400, maxItEstables = 1000;
+		final double tInicial=19, tMin=1;
 		double temp=tInicial;
+		int radio = 2;
 		
 		int itEstables=0, nEstacionesAnterior=0;
 		
@@ -214,7 +215,6 @@ public class BruteApproach {
  		// u  --> valor de la uniforme
  		double p_i = 1.0;
  		double u = 0.0;
-				
  		int contador = 0;
  		
 		while(temp > tMin && itEstables<maxItEstables){
@@ -223,7 +223,13 @@ public class BruteApproach {
 			
 			// 4 - Generamos una nueva solucion utilizando un entorno de radio 2 [mejor_sol.size()-1, mejor_sol_size()+1]
 			//int numeroDeEstacion = new Random().nextInt(2) + mejor_sol.size() -1;
-			int numeroDeEstacion = DistributionGenerator.uniform(mejor_sol.size() -1, mejor_sol.size() +1);
+			int lim_inf = mejor_sol.size() -radio>0?mejor_sol.size() -radio:1;
+			int lim_sup=mejor_sol.size() +radio;
+			int numeroDeEstacion = DistributionGenerator.uniform(lim_inf, lim_sup);
+			if(numeroDeEstacion>16)
+				numeroDeEstacion=16;
+			
+			
 			
 			// Creamos aleatoriamente una nueva solucion y
 			posible_sol_y = generateSolution(numeroDeEstacion);
@@ -255,6 +261,7 @@ public class BruteApproach {
 						mejor_sol = posible_sol_y;
 						f_mejor_sol=mejor_sol.size();
 						mejor_sol_object = posible_sol_y_object;
+						System.out.println("\n\nn estaciones = "+f_mejor_sol);
 					}
 				}
 			}
