@@ -169,8 +169,8 @@ public class BruteApproach {
 	public static void bruteApproach(){
 		
 		/* CONSTANTES DEL PROGRAMA */
-		final double ALFA = 0.9;
-		final int L = 400, maxItEstables = 1000;
+		final double ALFA = 0.95;
+		final int L = 100, maxItEstables = 1000;
 		final double tInicial=19, tMin=1;
 		double temp=tInicial;
 		int radio = 2;
